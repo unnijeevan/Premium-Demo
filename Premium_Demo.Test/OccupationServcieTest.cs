@@ -13,7 +13,7 @@ namespace Premium_Demo.Test
         private readonly Mock<IOccupationRepository> _occupationRepository;
         private readonly OccupationService _occupationService;
 
-        private Guid testItemId1 = new Guid("d1465ab8-834a-4d4a-9b29-8f5fbdac4e0c");
+        private Guid id1 = new Guid("d1465ab8-834a-4d4a-9b29-8f5fbdac4e0c");
 
         public OccupationServcieTest()
         {
@@ -35,21 +35,21 @@ namespace Premium_Demo.Test
         [Fact]
         public async Task Should_Return_Occupation_By_Id()
         {
-            _occupationRepository.Setup(or => or.GetByIdAsync(testItemId1)).Returns(Task.FromResult<Occupation>(
-                new Occupation { Id = testItemId1 }));
+            _occupationRepository.Setup(or => or.GetByIdAsync(id1)).Returns(Task.FromResult<Occupation>(
+                new Occupation { Id = id1 }));
 
-            var result = await _occupationService.GetOccupationByIdAsync(testItemId1);
+            var result = await _occupationService.GetOccupationByIdAsync(id1);
 
-            Assert.Equal(testItemId1, result.Id);
+            Assert.Equal(id1, result.Id);
         }
 
 
         [Fact]
         public async Task Should_Return_Null_If_Occupation_NotPresent()
         {
-            _occupationRepository.Setup(or => or.GetByIdAsync(testItemId1)).Returns(Task.FromResult<Occupation>(null));
+            _occupationRepository.Setup(or => or.GetByIdAsync(id1)).Returns(Task.FromResult<Occupation>(null));
 
-            var result = await _occupationService.GetOccupationByIdAsync(testItemId1);
+            var result = await _occupationService.GetOccupationByIdAsync(id1);
 
             Assert.Null(result);
         }
