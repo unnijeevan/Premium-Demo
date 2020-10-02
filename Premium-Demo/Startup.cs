@@ -23,6 +23,7 @@ namespace Premium_Demo
         {
             services.AddDbConfiguration();
             services.AddScoped<IOccupationService, OccupationService>();
+            services.AddScoped<IPricingService, PricingService>();
             services.AddControllers();
             services.AddSwaggerGen();
         }
