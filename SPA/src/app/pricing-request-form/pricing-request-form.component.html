@@ -17,7 +17,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Cover Amount</mat-label>
-            <input matInput placeholder="Cover Amount"  formControlName="amount" required (blur)="calculatePrice()">
+            <input matInput placeholder="00000.00"  formControlName="amount" required (blur)="calculatePrice()">
         </mat-form-field>
         <br/>
     <mat-form-field appearance="fill">
@@ -28,7 +28,7 @@
     </mat-form-field>
 </form>
  <h3>
-    Monthly Premium : {{ monthlyPremium }}
+    Monthly Premium : {{ monthlyPremium  | currency }}
  </h3>
 </div>
     
