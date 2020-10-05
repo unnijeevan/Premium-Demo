@@ -24,8 +24,12 @@ namespace Premium_Demo
             services.AddDbConfiguration();
             services.AddScoped<IOccupationService, OccupationService>();
             services.AddScoped<IPricingService, PricingService>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyCorsPolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +54,7 @@ namespace Premium_Demo
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("AllowAnyCorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

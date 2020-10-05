@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container" *ngIf="occupationOptions">
 <form  [formGroup]="form">
  
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="FirstName LastName"  formControlName="name" required>
+            <input matInput placeholder="FirstName LastName"  formControlName="name" required >
         </mat-form-field>
         <br/>
 
         <mat-form-field appearance="fill">
             <mat-label>Date of Birth</mat-label>
-            <input matInput [max]="max" [matDatepicker]="picker">
+            <input matInput [max]="max" [matDatepicker]="picker" required formControlName="dob" (blur)="calculatePrice()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field> 
@@ -17,10 +17,19 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Cover Amount</mat-label>
-            <input matInput placeholder="Cover Amount"  formControlName="amount" required>
+            <input matInput placeholder="Cover Amount"  formControlName="amount" required (blur)="calculatePrice()">
         </mat-form-field>
         <br/>
+    <mat-form-field appearance="fill">
+      <mat-label>Occupation</mat-label>
+      <mat-select required formControlName="occupation" placehoder="Select Occupation" (selectionChange)="calculatePrice()">          
+        <mat-option *ngFor="let occupation of occupationOptions" value="{{occupation.id}}">{{occupation.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 </form>
+ <h3>
+    Monthly Premium : {{ monthlyPremium }}
+ </h3>
 </div>
     
     
