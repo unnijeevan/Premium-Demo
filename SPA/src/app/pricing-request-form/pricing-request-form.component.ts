@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PricingService, Occupation } from '../pricing.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-pricing-request-form',
   templateUrl: './pricing-request-form.component.html',
@@ -9,6 +10,7 @@ import { PricingService, Occupation } from '../pricing.service';
 export class PricingRequestFormComponent implements OnInit {
 
   form: FormGroup;
+  //do not allow date from tomorrow for date of birth
   max:Date = new Date();
   occupationOptions: Occupation[];
   monthlyPremium:number;
@@ -37,8 +39,12 @@ export class PricingRequestFormComponent implements OnInit {
          this.form.get("dob").value,
          this.form.get("amount").value,
          this.form.get("occupation").value
-       ).subscribe(x=>{
-         this.monthlyPremium = x;
+       )
+       .pipe(
+        distinctUntilChanged()
+       )
+       .subscribe(p=>{
+         this.monthlyPremium = p;
        });
      }
      else

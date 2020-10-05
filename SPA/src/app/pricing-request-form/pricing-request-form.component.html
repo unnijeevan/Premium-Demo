@@ -11,7 +11,7 @@
             <mat-label>Date of Birth</mat-label>
             <input matInput [max]="max" [matDatepicker]="picker" required formControlName="dob" (blur)="calculatePrice()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker (dateChange)="calculatePrice()"></mat-datepicker>
           </mat-form-field> 
         <br/>
 
@@ -20,12 +20,14 @@
             <input matInput placeholder="00000.00"  formControlName="amount" required (blur)="calculatePrice()">
         </mat-form-field>
         <br/>
-    <mat-form-field appearance="fill">
-      <mat-label>Occupation</mat-label>
-      <mat-select required formControlName="occupation" placehoder="Select Occupation" (selectionChange)="calculatePrice()">          
-        <mat-option *ngFor="let occupation of occupationOptions" value="{{occupation.id}}">{{occupation.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+
+       <mat-form-field appearance="fill">
+          <mat-label>Occupation</mat-label>
+           <mat-select required formControlName="occupation" placehoder="Select Occupation" (selectionChange)="calculatePrice()">          
+           <mat-option *ngFor="let occupation of occupationOptions" value="{{occupation.id}}">{{occupation.name}}</mat-option>
+        </mat-select> 
+      </mat-form-field>
+
 </form>
  <h3>
     Monthly Premium : {{ monthlyPremium  | currency }}
